@@ -1,0 +1,11 @@
+POST http://localhost:5000/api/skill
+Content-Type: application/json
+
+{
+    "name": "REACT",
+    "vote": 5,
+}
+
+###
+GET http://localhost:5000/api/skill
+Content-Type: application/json
