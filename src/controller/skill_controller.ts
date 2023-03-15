@@ -3,15 +3,17 @@ import dataSource from "../utils";
 import { Skill } from "../entity/Skill";
 
 const skillController = {
-	create: (req: Request, res: Response) => {
-		dataSource
+	create: async (req: Request, res: Response) => {
+		await dataSource
 			.getRepository(Skill)
 			.save(req.body)
 			.then(() => {
 				res.send("Created skill");
 			})
-			.catch(() => {
-				res.send("Error while creating skill");
+			.catch((error) => {
+				// res.send("Error while creating skill");
+				res.send(error);
+				// console.log("bibi", error);
 			});
 	},
 	read: (req: Request, res: Response) => {

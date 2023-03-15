@@ -18,28 +18,11 @@ export class Wilder {
 	@Column()
 	city: string;
 
-	@ManyToMany(() => Skill)
+	@ManyToMany(() => Skill, (skill) => skill.wilder, { eager: true })
 	@JoinTable()
 	skills: Skill[];
-}
 
-// columns: {
-//     id: {
-//         primary: true,
-//         generated: true,
-//         type: "int"
-//     },
-//     name: {
-//         type: "text",
-//     },
-//     city: {
-//         type: "text",
-//         nullable: true,
-//     },
-// },
-// relations:{
-//     skills: {
-//         target: "Skill",
-//         type: "many-to-many",
-//         joinTable: true,
-//         eager: true,
+	// @ManyToMany(() => Skill)
+	// @JoinTable()
+	// skills: Skill[];
+}

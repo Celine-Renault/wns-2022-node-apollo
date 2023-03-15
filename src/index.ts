@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import dataSource from "./utils";
 
-import wilderController from "./controller/wilder";
 import skillController from "./controller/skill_controller";
+import wilderController from "./controller/wilder";
 
 const app = express();
 
@@ -15,13 +15,13 @@ app.get("/", (req, res) => {
 	res.send("Hello World");
 });
 
-// CRUD to Wilder
+// const wilderController = new WilderController();
 app.post("/api/wilder", wilderController.create);
 app.get("/api/wilder", wilderController.read);
 app.put("/api/wilder/:id", wilderController.update);
 app.delete("/api/wilder/:id", wilderController.delete);
 
-// CRUD to Skill
+// const skillController = new SkillController();
 app.post("/api/skill", skillController.create);
 app.get("/api/skill", skillController.read);
 app.put("/api/skill/:id", skillController.update);

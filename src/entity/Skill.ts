@@ -1,15 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm";
+import { Wilder } from "./Wilder";
 
 @Entity()
 export class Skill {
 	@PrimaryGeneratedColumn()
 	id: number;
 
-	@Column()
+	@Column({ unique: true })
 	name: string;
 
-	@Column({ unique: true })
-	vote: number;
+	// @Column()
+	// vote: number;
+
+	@ManyToMany((type) => Wilder, (wilder) => wilder.skills)
+	wilder: Wilder[];
 }
 
 // columns: {
@@ -18,8 +22,3 @@ export class Skill {
 // 		generated: true,
 // 		type: "int",
 // 	},
-// 	name: {
-// 		type: "text",
-// 		unique: true,
-// 	},
-// },

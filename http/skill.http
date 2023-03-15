@@ -2,10 +2,23 @@ POST http://localhost:5000/api/skill
 Content-Type: application/json
 
 {
-    "name": "REACT",
-    "vote": 5,
+    "name": "New Skill 04"
+
 }
 
 ###
 GET http://localhost:5000/api/skill
 Content-Type: application/json
+
+###
+PUT http://localhost:5000/api/skill/2
+Content-Type: application/json
+
+{
+    "name": "NODE"
+}
+
+###
+DELETE http://localhost:5000/api/skill/6
+Content-Type: application/json
+
