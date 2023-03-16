@@ -19,7 +19,9 @@ const wilderController = {
 			.then(() => {
 				res.send("Created wilder");
 			})
-			.catch(() => {
+			.catch((error) => {
+				console.log(error);
+
 				res.send("Error while creating wilder");
 			});
 	},
