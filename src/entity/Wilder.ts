@@ -6,13 +6,12 @@ import {
 	JoinTable,
 } from "typeorm";
 import { Skill } from "./Skill";
-
-import { Field, ObjectType } from "type-graphql";
+import { Field, ObjectType, ID } from "type-graphql";
 
 @ObjectType()
 @Entity()
 export class Wilder {
-	@Field()
+	@Field(() => ID) // specific field to Primary Key, type ID key and not a number like typescript
 	@PrimaryGeneratedColumn()
 	id: number;
 

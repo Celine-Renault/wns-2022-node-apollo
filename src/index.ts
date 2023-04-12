@@ -2,6 +2,7 @@ import dataSource from "./utils";
 import { ApolloServer } from "apollo-server";
 import { buildSchema } from "type-graphql";
 import { WildersResolver } from "./resolvers/WildersResolver";
+import { SkillsResolver } from "./resolvers/SkillsResolver";
 
 // const typeDefs = gql`
 // 	type Wilder {
@@ -54,7 +55,9 @@ import { WildersResolver } from "./resolvers/WildersResolver";
 
 const start = async (): Promise<void> => {
 	await dataSource.initialize();
-	const schema = await buildSchema({ resolvers: [WildersResolver] });
+	const schema = await buildSchema({
+		resolvers: [WildersResolver, SkillsResolver],
+	});
 	const server = new ApolloServer({
 		// typeDefs,
 		// resolvers,

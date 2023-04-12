@@ -1,10 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm";
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	ManyToMany,
+	BaseEntity,
+} from "typeorm";
 import { Wilder } from "./Wilder";
 import { ObjectType, Field } from "type-graphql";
 
 @ObjectType()
 @Entity()
-export class Skill {
+export class Skill extends BaseEntity {
+	// ajout de Skill extends BaseEntity pour eviter de repeter dataSource.getRepository(Skill) dans le SkillsResolver
 	@Field()
 	@PrimaryGeneratedColumn()
 	id: number;
@@ -17,7 +24,7 @@ export class Skill {
 	// vote: number; -- grade (note)
 
 	@Field(() => [Wilder])
-	@ManyToMany((type) => Wilder, (wilder) => wilder.skills)
+	@ManyToMany((type) => Wilder, (wilder) => wilder.skills) // pas oblige d'ajouter  { eager: true }, je peux le mettre uniqument c^té graphqm
 	wilder: Wilder[];
 }
 
