@@ -1,5 +1,6 @@
 import { Skill } from "../entity/Skill";
-import { Arg, Int, Mutation, Query } from "type-graphql";
+// import { Arg, Int, Mutation, Query } from "type-graphql";
+import { Arg, Mutation, Query } from "type-graphql";
 import dataSource from "../utils";
 
 export class SkillsResolver {
@@ -22,17 +23,21 @@ export class SkillsResolver {
 		return skills;
 	}
 
-	@Mutation(() => String)
+	@Mutation(() => Skill)
 	async updateSkill(
-		@Arg("skillId", () => Int) skillId: number,
+		@Arg("skillId") skillId: number,
 		@Arg("name") name: string
-	): Promise<string> {
-		const skillToUpdate = await Skill.findOneBy({ skillId });
+	): Promise<Skill> {
+		const skillToUpdate = await dataSource
+			.getRepository(Skill)
+			.findOneBy({ id: skillId });
+		if (skillToUpdate === null) {
+			throw new Error("Skill not found");
+		}
 
-		Skill.merge(skillToUpdate!, { name });
+		dataSource.getRepository(Skill).merge(skillToUpdate, { name });
+		await dataSource.getRepository(Skill).save(skillToUpdate);
 
-		await Skill.save(skillToUpdate!);
-
-		return "Test";
+		return skillToUpdate;
 	}
 }
